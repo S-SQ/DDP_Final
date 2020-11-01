@@ -1,0 +1,58 @@
+---
+title: "DDP Final"
+author: "Sean"
+date: "11/1/2020"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Agenda
+
+Welcome!  Below is how I will be checking the boxes for this course!
+
+- Page 1 (Was the title page before this)
+- Page 2 (This page!)
+- Page 3 (You'll see my leaflet!)
+- Page 4 (Insecticide Box Plots)
+- Page 5 (Farewell to thee!)
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+library(tidyverse)
+library(leaflet)
+library(htmltools)
+library(plotly)
+```
+
+## Leaflet Page!!
+
+```{r echo=FALSE}
+df1 <- quakes %>%
+  mutate(info = paste(sep = "</br>",
+                               paste('<b>Station:', stations,'</b>'),
+                               paste('<b>Depth: </b>', '<b style="color:red">', depth,'</b>'),
+                               paste('<b> Magnitude: </b>', '<b style="color:red">',  mag, '</b>')
+         ))
+
+leaflet(data = df1) %>%
+  addTiles() %>%
+  addMarkers(~long, ~lat, popup = ~info,
+             clusterOptions = markerClusterOptions())
+  
+```
+
+## Plotly Page!!
+
+```{r}
+p <- ggplot(InsectSprays, aes(x=spray, y=count)) + geom_boxplot() +
+  labs(title = 'Insecticide Effectiveness by Type', x = 'Type of Insecticide', y = 'Effectiveness')
+
+ggplotly(p)
+```
+
+## Farewell Page!!
+
+It's been fun!  I thought this class was actually pretty useful.  See you around!
+
